@@ -1,0 +1,11 @@
+/Stocks-*
+/.build
+!META.json
+*.swp
+*.un~
+/cover_db
+/nytprof*
+.DS_Store
+perltidy.LOG
+/bower_components
+/tmp

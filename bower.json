@@ -1,0 +1,18 @@
+{
+  "name": "stocks",
+  "version": "0.01",
+  "authors": [
+    "Marcel Gruenauer <marcel@marcelgruenauer.com>"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "d3": "latest",
+    "bootstrap": "latest"
+  }
+}
