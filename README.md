@@ -97,7 +97,7 @@ The `stocks` resource is implemented in `Stocks::Web::Resource::Stocks` using `W
 
     curl -H 'Accept: text/csv' "http://localhost:5000/api/v1/stocks"
 
-However, often this is inefficient; you will want only part of the data, possibly aggregated. You can specify which fields you want by listing them in a comma-separated list in the `fields` query parameter. Each field can be either just the field name or it can have a colon-prepanded operation. The operation can be 'groupby' or 'sum', using the standard SQL semantics. For example:
+However, often this is inefficient; you will want only part of the data, possibly aggregated. You can specify which fields you want by listing them in a comma-separated list in the `fields` query parameter. Each field can be either just the field name or it can have a colon-prepanded operation. The operation can be `groupby` or `sum`, using the standard SQL semantics. For example:
 
     curl -H 'Accept: text/csv' "http://localhost:5000/api/v1/stocks?fields=groupby:ticker,sum:volume"
 
