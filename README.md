@@ -30,8 +30,6 @@ All the pieces work together in a lightweight way. No dynamic HTML is generated 
 
 This demo uses [historical S&P500 stock data](http://pages.swcp.com/stocks/#historical%20data). See `data/sp500hst.txt`.
 
-The executable is `bin/stocks`.
-
 # Installation
 
 You can run this demo from its git working directory. There is no Makefile.PL because it is not intended to be installed.
@@ -64,7 +62,7 @@ Configuration keys are strictly checked using `Data::Domain`. The following keys
 
 To use a configuration file, you can either specify it as an option to a command or use an envionment variable.
 
-    ./bin/stocks <command> -c <path/to/config>
+    ./bin/stocks <command> -c path/to/config
 
 or
 
@@ -97,7 +95,7 @@ The `stocks` resource is implemented in `Stocks::Web::Resource::Stocks` using `W
 
     curl -H 'Accept: text/csv' "http://localhost:5000/api/v1/stocks"
 
-However, often this is inefficient; you will want only part of the data, possibly aggregated. You can specify which fields you want by listing them in a comma-separated list in the `fields` query parameter. Each field can be either just the field name or it can have a colon-prepanded operation. The operation can be `groupby` or `sum`, using the standard SQL semantics. For example:
+However, often this is inefficient; you will want only part of the data, possibly aggregated. You can specify which fields you want by listing them in a comma-separated list in the `fields` query parameter. Each field can be either just the field name or it can have a colon-prepended operation. The operation can be `groupby` or `sum`, using the standard SQL semantics. For example:
 
     curl -H 'Accept: text/csv' "http://localhost:5000/api/v1/stocks?fields=groupby:ticker,sum:volume"
 
