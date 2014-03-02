@@ -10,7 +10,7 @@ The purpose of this demo app is to show a way of visualizing data using lightwei
 
 The main points of interest in this demo are:
 
-* Dependencies are specified in a cpanfile and can be installed with cpanm.
+* Dependencies are specified in `cpanfile` and can be installed with `cpanm`.
 
 * There is only one executable. Everything from database setup to importing the data and serving it are done with this executable, which uses `App::Cmd`.
 
@@ -32,7 +32,7 @@ This demo uses [historical S&P500 stock data](http://pages.swcp.com/stocks/#hist
 
 # Installation
 
-You can run this demo from its git working directory. There is no Makefile.PL because it is not intended to be installed.
+You can run this demo from its git working directory. There is no `Makefile.PL` because it is not intended to be installed.
 
 Dependencies are kept in `cpanfile`, so you can install them with:
 
@@ -44,7 +44,7 @@ JavaScript dependencies are specified in `bower.json`. Install them with:
 
 # Command line interface
 
-The app is controlled with a single executable, `bin/stocks`. It uses `App::Cmd` to provide various commands. Just running the command without options will display a list of available commands. `bin/stocks help <command>` will display more detailed information about a command.
+The app is controlled with a single executable, `./bin/stocks`. It uses `App::Cmd` to provide various commands. Just running the program without options will display a list of available commands. `./bin/stocks help <command>` will display more detailed information about a command.
 
 # Configuration
 
@@ -54,13 +54,13 @@ Configuration keys are strictly checked using `Data::Domain`. The following keys
 
 * `dbname`: Name of the PostgreSQL database. Mandatory.
 
-* `dbhost`, `dbpost`, `dbuser`, `dbpass`: Options extra fields for the database connect string.
+* `dbhost`, `dbpost`, `dbuser`, `dbpass`: Optional extra fields for the database connect string.
 
 * `ddl_file`: Path to the DDL file. It can be absolute or relative to the working directory root (i.e., where the `.git` directory is). Mandatory.
 
 * `htdocs`: Path to the directory that holds static Web resources like HTML files or CSS files. It can be absolute or relative to the working directory root. Mandatory.
 
-To use a configuration file, you can either specify it as an option to a command or use an environment variable.
+To use a configuration file, you can either specify it as an option to a command or use the `STOCKS_CONF` envionment variable.
 
     ./bin/stocks <command> -c path/to/config
 
