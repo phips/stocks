@@ -42,6 +42,7 @@ sub read_config {
     $config = $config->{_};
     my $domain = Struct(
         -fields => {
+            dbdriver => String(-optional => 1),
             dbname   => String,
             dbhost   => String(-optional => 1),
             dbport   => String(-optional => 1),
@@ -61,24 +62,33 @@ sub get_schema {
     # don't use() or the genschema command can't run the first time
     require Stocks::Schema;
     our $schema //= do {
-        my $connect_string = sprintf "dbi:Pg:dbname=%s", $::config->{dbname};
+        my $dbdriver = $::config->{dbdriver} || 'Pg';
+        my $connect_string = sprintf "dbi:%s:dbname=%s", $dbdriver, $::config->{dbname};
         $connect_string .= ';host=' . $::config->{dbhost}
           if $::config->{dbhost};
         $connect_string .= ';port=' . $::config->{dbport}
           if $::config->{dbport};
         Stocks::Schema->connect($connect_string, $::config->{dbuser},
-            $::config->{dbpass},);
+            $::config->{dbpass}, $dbdriver eq 'SQLite' ? {sqlite_unicode => 1} : ());
     };
 }
 
 sub destroy_and_create_db {
     my $args = $::config->{dbname};
-    $args .= " -h $::config->{dbhost}" if $::config->{dbhost};
-    $args .= " -U $::config->{dbuser}" if $::config->{dbuser};
-    $args .= " -p $::config->{dbport}" if $::config->{dbport};
     my $ddl_file = get_absolute_path($::config->{ddl_file});
-    do_system("dropdb $args", 1);
-    do_system("createdb -E UTF8 $args");
-    do_system("psql $args <$ddl_file");
+    my $dbdriver = $::config->{dbdriver} || 'Pg';
+    if ($dbdriver eq 'Pg') {
+        $args .= " -h $::config->{dbhost}" if $::config->{dbhost};
+        $args .= " -U $::config->{dbuser}" if $::config->{dbuser};
+        $args .= " -p $::config->{dbport}" if $::config->{dbport};
+        do_system("dropdb $args", 1);
+        do_system("createdb -E UTF8 $args");
+        do_system("psql $args <$ddl_file");
+    } elsif ($dbdriver eq 'SQLite') {
+        do_system("rm -f $args", 1);
+        do_system("sqlite3 $args <$ddl_file");
+    } else {
+        die "unsupport dbdriver $dbdriver\n";
+    }
 }
 1;

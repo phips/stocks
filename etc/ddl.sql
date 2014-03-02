@@ -9,5 +9,5 @@ CREATE TABLE stocks (
     volume INTEGER NOT NULL
 );
 
-CREATE INDEX day_idx ON stocks USING BTREE (day);
-CREATE INDEX ticker_idx ON stocks USING BTREE (ticker);
+CREATE INDEX day_idx ON stocks (day);
+CREATE INDEX ticker_idx ON stocks (ticker);
