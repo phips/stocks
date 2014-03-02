@@ -99,7 +99,7 @@ However, often this is inefficient; you will want only part of the data, possibl
 
     curl -H 'Accept: text/csv' "http://localhost:5000/api/v1/stocks?fields=groupby:ticker,sum:volume"
 
-You can also filter the data by using query parameters corresponding to the column names - `day`, `ticker`, `open`, `high`, `low`, `close` and `volume`.The result will then only contain those rows that have the specified value. So using those query parameters will effectively build up a `WHERE` clause.
+You can also filter the data by using query parameters corresponding to the column names - `day` or `ticker`. (It doesn't really make sense to filter by `open`, `high`, `low`, `close` or `volume`.)  The result will then only contain those rows that have the specified value. So using those query parameters will effectively build up a `WHERE` clause.
 
     curl -H 'Accept: text/csv' "http://localhost:5000/api/v1/stocks?ticker=AAPL"
 
