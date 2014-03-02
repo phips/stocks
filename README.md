@@ -60,7 +60,7 @@ Configuration keys are strictly checked using `Data::Domain`. The following keys
 
 * `htdocs`: Path to the directory that holds static Web resources like HTML files or CSS files. It can be absolute or relative to the working directory root. Mandatory.
 
-To use a configuration file, you can either specify it as an option to a command or use an envionment variable.
+To use a configuration file, you can either specify it as an option to a command or use an environment variable.
 
     ./bin/stocks <command> -c path/to/config
 
