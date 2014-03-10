@@ -1,5 +1,7 @@
 requires 'parent';
 requires 'App::Cmd';
+requires 'Config::Tiny';
+requires 'JSON::XS';
 requires 'Plack';
 requires 'Plack::Middleware::DirIndex';
 requires 'DBIx::Class';
